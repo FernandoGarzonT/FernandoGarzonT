@@ -1,4 +1,4 @@
-{% extends "base_games.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
@@ -9,7 +9,7 @@
                 <div class="content">
                     <h1>Odd or Even</h1>
                     <p>It allows us to know if the number entered is even or odd.</p>
-                    <input type="text" id="{{ parorimpar.num }}" class="form-control" name="{{ parorimpar.num }}" placeholder="Number">
+                    <input type="text" id="num" class="form-control" name="{{ parorimpar.num }}" placeholder="Number">
                     <button type="submit" class="btn">Check</button>
                 </div>
             </form>
@@ -18,7 +18,7 @@
                 <div class="content">
                     <h1>Palindrome</h1>
                     <p>It allows us to know if a word is written the same way forward as backwards</p>
-                    <input type="text" id="palabra" class="form-control" name="palabra" placeholder="Word">
+                    <input type="text" id="palabra" class="form-control" name="{{ palindromo.palabra }}" placeholder="Word">
                     <button type="submit" class="btn btn-success">Check</button>
                 </div>
             </form>

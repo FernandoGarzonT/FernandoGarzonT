@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.models import User
-from .models import Imagen, Person
+from .models import Imagen, Person, Minigame
 from .forms import RegistrationForm
 
 
@@ -25,11 +25,12 @@ class ImagenView(generic.ListView):
 
 
 class GameView(generic.ListView):
+    model = Minigame
     template_name = 'games.html'
     context_object_name= 'ct_games'
 
     def palindromo(request):
-        """Palindrome function"""
+        r"Palindrome function"
         if request.method == 'POST':
             palabra = request.POST.get('palabra', '')
 
@@ -43,7 +44,7 @@ class GameView(generic.ListView):
         return render(request, 'games.html', palabra)
 
     def parorimpar(request):
-        """Odd or even function"""
+        r"Odd or even function"
 
         if request.method == 'POST':
             num = request.POST.get('num', '')
@@ -54,12 +55,12 @@ class GameView(generic.ListView):
                 return HttpResponse(num + "It's Even")
             else:
                 return HttpResponse(num + "It's Odd") 
-             
+                
         return render(request, 'games.html', num)
 
     def get_queryset(self):
         return self.parorimpar, self.palindromo
-    
+
 
 class RegistrationView(generic.CreateView):
     model = User

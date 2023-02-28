@@ -1,3 +1,4 @@
+from ast import Num
 from django.db import models
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.validators import UnicodeUsernameValidator
@@ -55,4 +56,11 @@ class Person(models.Model):
     def __str__(self):
         return self.email_person
 
+class Minigame(models.Model):
+    """Variables for Minigames"""
 
+    num = models.CharField(max_length=12)
+    palabra = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.num, self.palabra
