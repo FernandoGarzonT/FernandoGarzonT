@@ -6,32 +6,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <title>GT APP</title>
 </head>
 <body>
     <header>
-        <div class="main">
-            <nav class="navbar navbar-inverse" role="navigation" style="margin-bottom: 6">
-                <ul>
-                    <li class="active"><a href="{% url 'gtapp:index' %}">HOME</a></li>
-                    <li><a href="{% url 'gtapp:imagen' %}">Imagens</a></li>
-                    <li><a href="">Videos</a></li>
-                    <li><a href="">Music</a></li>
-                    <li><a href="{% url 'gtapp:games' %}">MiniGames</a></li>
-                    <li><a href="">Posts</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'gtapp:profile' %}">Profile</a></li>
-                        <li><a class="logout1" href="{% url 'gtapp:logout' %}">Log Out</a></li>
-                    {% else %}
-                        <li><a class="login1" href="{% url 'gtapp:login' %}">Log In</a></li>
-                    {% endif %} 
-                </ul>
-            </nav>
+        <div class="navbar">
+            <input type="checkbox" name="" id="check">
+            <label for="check" class="checkbtn">
+                <i class="menu-icon">
+                <img id="ico" src="../static/images/lista.png" alt="" width="16" height="16" 
+                        fill="currentColor" viewBox="0 0 16 16">
+                </i>
+            </label> 
+            <ul class="ul-list">
+                <li class="li-item" id="active"><a class="a-item" href="{% url 'gtapp:index' %}">HOME</a></li>
+                <li class="li-item"><a class="a-item" href="{% url 'gtapp:imagen' %}">Imagens</a></li>
+                <li class="li-item"><a class="a-item" href="">Videos</a></li>
+                <li class="li-item"><a class="a-item" href="">Music</a></li>
+                <li class="li-item"><a class="a-item" href="{% url 'gtapp:games' %}">MiniGames</a></li>
+                <li class="li-item"><a class="a-item" href="">Posts</a></li>
+                {% if user.is_authenticated %}
+                    <li class="li-item"><a class="a-item" href="{% url 'gtapp:profile' %}">Profile</a></li>
+                    <li class="li-item"><a class="a-item" class="logout1" href="{% url 'gtapp:logout' %}">Log Out</a></li>
+                {% else %}
+                    <li class="li-item"><a class="a-item" class="login1" href="{% url 'gtapp:login' %}">Log In</a></li>
+                {% endif %} 
+            </ul>
         </div>
     </header>
+    <br> <br>
     {% block content %}
       
     {% endblock content %}

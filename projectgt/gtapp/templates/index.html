@@ -2,17 +2,21 @@
 {% load static %}
 
 {% block content %}
-    <div class="row" style="padding:30px;margin-top:30px;"> 
-        {% csrf_token %}
+{% csrf_token %}
+<div class="container">
+    <br> <br> 
+    <div class="title">
         {% if user.is_authenticated %}
-        <h1>&#10055; Welcome to GT APP {{ user.first_name }} {{ user.last_name }} &#10055;</h1>
+            <h1 class="a-title">&#10055; Welcome to GT APP {{ user.first_name }} {{ user.last_name }} &#10055;</h1>
         {% else %}
-        <h1>&#10055; Welcome to GT APP &#10055;</h1>
-    {% endif %} 
-        <div class="container-img">
-            <picture>        
-                <img src="{% static 'images/paisaje1.jpg' %}" alt="Paisaje">     
-            </picture>
-        </div>
+            <h1 class="a-title">&#10055; Welcome to GT APP &#10055;</h1>
+        {% endif %} 
     </div>
+    <br> 
+    <div class="imagen_main_page">   
+        <center>
+            <img id="imagen_main_page" src="{% static 'images/paisaje1.jpg' %}" alt="Paisaje">     
+        </center>  
+    </div>
+</div>
 {% endblock content %}
