@@ -2,27 +2,25 @@
 {% load static %}
 
 {% block content %}
-    <div class="flex-container" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% if context_imagen %}
+<div class="flex-container" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if context_imagen %}
         {% for Imagen in context_imagen %}
             <div class="col">
-                <div class="col-md-8">
-                    <img src="{{ Imagen.image_location.url }}" alt="{{ Imagen.name_imagen }}" 
-                    BORDER="3">   
+                <div class="col-2">
+                    <img class="img-card" src="{{ Imagen.image_location.url }}" alt="{{ Imagen.name_imagen }}">   
                 </div>           
-                <div class="card" style="width: 25rem;" data-layer="0">
+                <div class="card">
                     <h5 class="card-title">{{ Imagen.name_imagen }}</h5>
                     <p class="card-text">{{ Imagen.text_imagen }}.</p>
                 </div>  
             </div>
         {% endfor %}
-        {% else %}
-            <br> <br> <br>
-            <p>No Imagen are available</p>
-        {% endif %}
-    </div>
-    <br> <br> <br>
-    <hr>
+    {% else %}
+        <br> <br> <br>
+        <p>No Imagen are available</p>
+    {% endif %}
+</div>
+<br> <br> <br> <hr>
     <a id="back" href="{% url 'gtapp:index' %}">Back to page main?</a>
 {% endblock content %}
