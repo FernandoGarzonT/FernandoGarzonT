@@ -10,9 +10,30 @@
     <link rel="stylesheet" href="{% static 'css/games.css' %}">
     <link rel="stylesheet" href="{% static 'css/imagen.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <title>GT APP</title>
 </head>
 <body>
+    <header>
+        <div class="main">
+            <nav class="navbar navbar-inverse" role="navigation" style="margin-bottom: 6">
+                <ul>
+                    <li class="active"><a href="{% url 'gtapp:index' %}">HOME</a></li>
+                    <li><a href="{% url 'gtapp:imagen' %}">Imagens</a></li>
+                    <li><a href="">Videos</a></li>
+                    <li><a href="">Music</a></li>
+                    <li><a href="{% url 'gtapp:games' %}">MiniGames</a></li>
+                    <li><a href="">Posts</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'gtapp:profile' %}">Profile</a></li>
+                        <li><a class="logout1" href="{% url 'gtapp:logout' %}">Log Out</a></li>
+                    {% else %}
+                        <li><a class="login1" href="{% url 'gtapp:login' %}">Log In</a></li>
+                    {% endif %} 
+                </ul>
+            </nav>
+        </div>
+    </header>
     {% block content %}
       
     {% endblock content %}
