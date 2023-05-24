@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views import generic
+from django.views import generic, View
 from django.contrib.auth.models import User
-from .models import Imagen, Person, Minigame
+from .models import Imagen, Person
 from .forms import RegistrationForm
+from PyQt5.QtWidgets import QMessageBox
+import datetime
+from django.contrib import messages
 
 
 
@@ -14,7 +17,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Imagen.objects.all()
 
-
 class ImagenView(generic.ListView):
     model = Imagen
     template_name = 'imagen.html'
@@ -22,59 +24,59 @@ class ImagenView(generic.ListView):
 
     def get_queryset(self):
         return Imagen.objects.all()
-
-
-class GameView(generic.ListView):
-    model = Minigame
-    template_name = 'games.html'
-    context_object_name= 'ct_games'
-
-    def palindromo(request):
-        r"Palindrome function"
-        if request.method == 'POST':
-            palabra = request.POST.get('palabra', '')
-
-            invertida = palabra[::-1]
-
-            if invertida == palabra:
-                return HttpResponse("Is Palindrome")
-            else:
-                return HttpResponse("Not is Palindrome")
-
-        return render(request, 'games.html', palabra)
-
-    def parorimpar(request):
-        r"Odd or even function"
-
-        if request.method == 'POST':
-            num = request.POST.get('num', '')
-
-            num = int(num)
-
-            if num%2 == 0:
-                return HttpResponse(num + "It's Even")
-            else:
-                return HttpResponse(num + "It's Odd") 
-                
-        return render(request, 'games.html', num)
-
-    def get_queryset(self):
-        return self.parorimpar, self.palindromo
-
-
+        
 class RegistrationView(generic.CreateView):
     model = User
     template_name = 'registration.html'
     context_object_name = 'context_registration'
     form_class = RegistrationForm
 
- 
 class ProfileView(generic.ListView):
     """View Profile User"""
 
     model = Person
     template_name = 'profile.html'
     
+class PalindromoAlsoOddorEvenView(View):
+        r"Palindrome and Odd or Even class"
 
-   
+        template_name = 'dinamics.html'
 
+        def check_palindromo(self, word):
+
+            cleaned_palabra = word.lower().replace(' ', '')
+
+            """       palindromo = cleaned_palabra == cleaned_palabra[::-1]
+
+            if palindromo:
+                return messages.success(self.request, 'Es un Palidromo')
+            else:
+                return messages.error(self.request, 'No es un Palidromo') """
+        
+            return cleaned_palabra == cleaned_palabra[::-1]
+        
+        def check_oddoreven(self, num):
+          
+            num = int(num)
+
+            return num%2 == 0
+
+        def get(self, request):
+            return render(request, self.template_name)
+        
+        def post(self, request):
+
+            word = request.POST.get('word')
+            num = request.POST.get('num')
+
+            palindromo = self.check_palindromo(word)
+            odd_even = self.check_oddoreven(num)
+            
+            context = {'word': word, 
+                       'num': num, 
+                       'palindromo': palindromo, 
+                       'odd_even': odd_even}
+
+            return render(request, self.template_name, context)
+
+       

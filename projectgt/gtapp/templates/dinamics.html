@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% csrf_token %}
+    <div class="conteiner">
+        <form method="post" action="{% url 'gtapp:dinamics' %}" style="text-align: center">
+            {% csrf_token %}
+            <div class="content">
+                <h1>Palindrome also Odd or Even</h1>
+                <p>It allows us to know if a word is written the same way forward as backwards
+                    also It allows us to know if the number entered is even or odd.</p>
+
+                <label>Word:</label>
+                <input class="word" type="text" name="word" id="word" required>
+        
+                <label>Number:</label>
+                <input class="num" type="text" name="num" id="num" required>
+        
+                <input type="submit" value="Check">
+            </div>
+        </form>
+    </div>
+    <br> <br> <br>
+    <div>
+        {% if word and num %}
+            <p>Word: {{ word }} Is palíndrome: {% if palindromo %}Yes{% else %}No{% endif %}</p>
+            <p>Number: {{ num }} Is prime: {% if odd_even %}Yes{% else %}No{% endif %}</p>
+        {% endif %}
+    </div>
+
+    <!--{% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+             </ul>
+        {% endif %} -->
+    <br> <br> <br>
+    <hr>
+    <a id="back" href="{% url 'gtapp:index' %}">Back to page main?</a>
+{% endblock content %}
+
